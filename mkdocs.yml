@@ -1,0 +1,39 @@
+site_name: GLM-met
+repo_url: https://github.com/WET-tool/glm-met
+repo_name: WET-tool/glm-met
+
+theme:
+    name: material
+    logo: 'img/glm-icon2.png'
+
+extra:
+  social:
+    - icon: "fontawesome/brands/github"
+      link: "https://github.com/"
+
+extra_css:
+    - css/extra.css
+
+plugins:
+- search
+- mkdocstrings:
+    default_handler: python
+    handlers:
+      python:
+        options:
+          docstring_style: numpy
+          docstring_section_style: list
+          show_source: false
+          merge_init_into_class: true
+
+markdown_extensions:
+  - toc:
+      permalink: True
+
+nav:
+  - Home: index.md
+  - Contributing: contributing.md
+  - API Reference:
+    - open-meteo (historical): open-meteo-historical.md
+    - open-meteo (climate): open-meteo-climate.md
+

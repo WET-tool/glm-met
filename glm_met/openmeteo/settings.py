@@ -34,5 +34,5 @@ daily_historical_glm_default = [
     "shortwave_radiation_sum",
     "temperature_2m_mean",
     "windspeed_10m_max",
-    "precipitation_sum"
+    "precipitation_sum",
 ]

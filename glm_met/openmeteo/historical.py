@@ -73,7 +73,7 @@ class Historical(glm_met.GlmMet):
         glm_met_data: Union[None, pd.DataFrame],
         variables: Union[None, list[str]],
         timezone: str = "auto",
-        hourly: bool = True
+        hourly: bool = True,
     ):
         """Initialises a `Historical` object retrieving and storing
         meteorological data from open-meteo's Historical API.
@@ -129,9 +129,9 @@ class Historical(glm_met.GlmMet):
             https://open-meteo.com/en/docs/historical-weather-api
         """
 
-        #hourly
+        # hourly
         if self.hourly:
-            if self.variables == None:
+            if self.variables is None:
                 self.variables = settings.hourly_historical_glm_default
 
             payload = {
@@ -152,10 +152,9 @@ class Historical(glm_met.GlmMet):
             r_json = r.json()
             df = pd.DataFrame(r_json.pop("hourly"))
             metadata = r_json
-        # daily    
+        # daily
         else:
-            
-            if self.variables == None:
+            if self.variables is None:
                 self.variables = settings.daily_historical_glm_default
 
             payload = {
@@ -213,12 +212,12 @@ class Historical(glm_met.GlmMet):
         Convert hourly meteorological data to GLM format
         and store it in the `glm_met_data` attribute.
 
-        This function only works with hourly data, this method expects the 
-        `met_data.data` attribute of the `Historical` object to have the 
-        following variables: `time`, `shortwave_radiation`, `cloudcover`, 
-        `temperature_2m`, `relativehumidity_2m`, `windspeed_10m` and 
-        `precipitation`. 
-        
+        This function only works with hourly data, this method expects the
+        `met_data.data` attribute of the `Historical` object to have the
+        following variables: `time`, `shortwave_radiation`, `cloudcover`,
+        `temperature_2m`, `relativehumidity_2m`, `windspeed_10m` and
+        `precipitation`.
+
         If the data in `met_data.data` has different
         variables, you will need to write your own function to convert the data
         to GLM format.
@@ -244,12 +243,11 @@ class Historical(glm_met.GlmMet):
 
             self.glm_met_data = df_glm
 
-
     def write_glm_met(self, path: str, zip_f: bool, fname: str) -> None:
         """
         Save meteorological data in GLM format and its metadata to file.
 
-        Only works after a call to `convert_to_glm()` and with hourly 
+        Only works after a call to `convert_to_glm()` and with hourly
         data.
 
         Parameters
@@ -288,4 +286,3 @@ class Historical(glm_met.GlmMet):
                             z_dst.write(file, arcname=file.split("/")[-1])
             else:
                 self.glm_met_data.to_csv(os.path.join(path, fname))
-

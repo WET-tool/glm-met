@@ -79,8 +79,8 @@ class ClimateChange(glm_met.GlmMet):
             Attribute to store meteorological data downloaded from open-meteo.
         glm_met_data : Union[None, dict]
             Attribute to store meteorological data downloaded from open-meteo
-            in GLM format. Dictionary of DataFrames with each DataFrame 
-            corresponding to a climate model in models. 
+            in GLM format. Dictionary of DataFrames with each DataFrame
+            corresponding to a climate model in models.
         models : list[str]
             List of Climate models to download data from.
             Seven models are supported by open-meteo's Climate API:
@@ -193,7 +193,9 @@ class ClimateChange(glm_met.GlmMet):
         for m in self.models:
             tmp_data = {
                 "time": self.met_data.data["time"],
-                "ShortWave": self.met_data.data[f"shortwave_radiation_sum_{m}"],
+                "ShortWave": self.met_data.data[
+                    f"shortwave_radiation_sum_{m}"
+                ],
                 "Cloud": self.met_data.data[f"cloudcover_mean_{m}"] / 100,
                 "AirTemp": self.met_data.data[f"temperature_2m_mean_{m}"],
                 "RelHum": self.met_data.data[f"relative_humidity_2m_mean_{m}"],
@@ -202,17 +204,15 @@ class ClimateChange(glm_met.GlmMet):
             }
 
             climate_models_glm[m] = pd.DataFrame(tmp_data)
-        
 
         self.glm_met_data = climate_models_glm
 
-    def write_glm_met(
-        self, path: str) -> None:
+    def write_glm_met(self, path: str) -> None:
         """
         Save meteorological data in GLM format and its metadata to file.
 
-        Data associated with a different climate model is written to 
-        a different csv file. The climate models name is included in 
+        Data associated with a different climate model is written to
+        a different csv file. The climate models name is included in
         the csv file's name.
 
         A zip file of csv files is written to `path`.
@@ -235,4 +235,3 @@ class ClimateChange(glm_met.GlmMet):
             ) as z_dst:
                 for file in files:
                     z_dst.write(file, arcname=file.split("/")[-1])
-

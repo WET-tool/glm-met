@@ -1,0 +1,8 @@
+.md-header {
+    z-index: 2000 !important;
+}
+
+:root {
+    --md-primary-fg-color: #009ccb;
+    --md-accent-fg-color: #007092;
+}

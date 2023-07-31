@@ -8,3 +8,4 @@ mkdocstrings[python]==0.22.0
 mkdocs-material==9.1.19
 pre-commit==3.3.3
 build==0.10.0
+twine==4.0.2

@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "glm-met"
 version = "0.0.1"
 description = "Download meteorological data for the General Lake Model"
-readme = "README.md"
+readme = README.md
 authors = [{name = "John Duncan"}]
 license = { file = "LICESNE" }
 classifiers = [

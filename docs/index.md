@@ -31,7 +31,7 @@ The following Jupyter notebook can be opened on Google Colab to demonstrate how 
 
 ```
 import os
-import glm_met.openmeteo.hisorical as historical
+import glm_met.openmeteo.historical as historical
 
 # initialise a Historical object
 # the object attributes are set to:

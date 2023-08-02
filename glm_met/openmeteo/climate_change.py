@@ -150,7 +150,9 @@ class ClimateChange(glm_met.GlmMet):
         """
 
         with tempfile.TemporaryDirectory() as tmpdir:
-            self.met_data.data.to_csv(os.path.join(tmpdir, "met_raw.csv"))
+            self.met_data.data.to_csv(
+                os.path.join(tmpdir, "met_raw.csv"), index=False
+            )
 
             with open(
                 os.path.join(tmpdir, "met_raw_metadata.json"), "w"
@@ -227,7 +229,9 @@ class ClimateChange(glm_met.GlmMet):
         with tempfile.TemporaryDirectory() as tmpdir:
             for m in self.models:
                 tmp_df = self.glm_met_data[m]
-                tmp_df.to_csv(os.path.join(tmpdir, f"met_{m}.csv"))
+                tmp_df.to_csv(
+                    os.path.join(tmpdir, f"met_{m}.csv"), index=False
+                )
                 files.append(os.path.join(tmpdir, f"met_{m}.csv"))
 
             with zipfile.ZipFile(

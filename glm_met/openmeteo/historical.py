@@ -189,7 +189,9 @@ class Historical(glm_met.GlmMet):
         """
 
         with tempfile.TemporaryDirectory() as tmpdir:
-            self.met_data.data.to_csv(os.path.join(tmpdir, "met_raw.csv"))
+            self.met_data.data.to_csv(
+                os.path.join(tmpdir, "met_raw.csv"), index=False
+            )
 
             with open(
                 os.path.join(tmpdir, "met_raw_metadata.json"), "w"
@@ -265,7 +267,9 @@ class Historical(glm_met.GlmMet):
 
             if zip_f:
                 with tempfile.TemporaryDirectory() as tmpdir:
-                    self.glm_met_data.to_csv(os.path.join(tmpdir, "met.csv"))
+                    self.glm_met_data.to_csv(
+                        os.path.join(tmpdir, "met.csv"), index=False
+                    )
 
                     with open(
                         os.path.join(tmpdir, "met_glm_metadata.json"), "w"
@@ -285,4 +289,6 @@ class Historical(glm_met.GlmMet):
                         for file in files:
                             z_dst.write(file, arcname=file.split("/")[-1])
             else:
-                self.glm_met_data.to_csv(os.path.join(path, fname))
+                self.glm_met_data.to_csv(
+                    os.path.join(path, fname), index=False
+                )

@@ -232,8 +232,12 @@ class Historical(glm_met.GlmMet):
 
         if self.hourly:
             df_glm = pd.DataFrame(
+                # glm requires time to have "hh:mm:ss" - append :00 to date-time string
                 data={
-                    "time": self.met_data.data["time"].str.replace("T", " "),
+                    "time": self.met_data.data["time"]
+                    .str.replace("T", " ")
+                    .astype(str)
+                    + ":00",
                     "ShortWave": self.met_data.data["shortwave_radiation"],
                     "Cloud": self.met_data.data["cloudcover"] / 100,
                     "AirTemp": self.met_data.data["temperature_2m"],

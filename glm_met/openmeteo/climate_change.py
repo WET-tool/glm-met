@@ -188,6 +188,11 @@ class ClimateChange(glm_met.GlmMet):
         (0.0 to 1.0).
 
         `precipitation` is in mm. GLM requires it in m so it is converted.
+
+        Not all meteorological variables required by GLM are available for every
+        model. Missing data values will be returned for these cases. Values in the
+        `time` column are in `YYYY-MM-DD` format. If `hh:mm:ss` values are
+        required, these will need to be added in a subsequent processing step.
         """
 
         climate_models_glm = {}

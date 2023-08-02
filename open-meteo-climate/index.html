@@ -642,6 +642,10 @@ to GLM format.</p>
 <p><code>cloudcover</code> from openmeteo is in percentage. GLM requires it as a proportion
 (0.0 to 1.0).</p>
 <p><code>precipitation</code> is in mm. GLM requires it in m so it is converted.</p>
+<p>Not all meteorological variables required by GLM are available for every
+model. Missing data values will be returned for these cases. Values in the
+<code>time</code> column are in <code>YYYY-MM-DD</code> format. If <code>hh:mm:ss</code> values are
+required, these will need to be added in a subsequent processing step.</p>
 
   </div>
 

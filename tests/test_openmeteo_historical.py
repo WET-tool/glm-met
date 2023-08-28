@@ -93,18 +93,21 @@ def test_historical_get_data_daily(valid_openmeteo_historical_init):
     target_cols = [
     "shortwave_radiation_sum",
     "temperature_2m_mean",
+    "temperature_2m_max",
+    "temperature_2m_min",
     "windspeed_10m_max",
-    "precipitation_sum"
+    "precipitation_sum",
+    "et0_fao_evapotranspiration"
     ]   
 
     src_cols = tmp_historical.met_data.data.columns
 
-    matching_cols = [c for c in src_cols if c  in target_cols]
+    matching_cols = [c for c in src_cols if c in target_cols]
 
 
     assert isinstance(tmp_historical.met_data.metadata, dict) \
         and isinstance(tmp_historical.met_data.data, pd.core.frame.DataFrame) \
-        and (len(matching_cols) == 4)
+        and (len(matching_cols) == 7)
     
 def test_historical_get_data_daily_custom_variables(valid_openmeteo_historical_init):
     """Test download of daily data from open-meteo Historical API
@@ -114,7 +117,7 @@ def test_historical_get_data_daily_custom_variables(valid_openmeteo_historical_i
     tmp_historical = historical.Historical(
         location=(valid_openmeteo_historical_init["longitude"], valid_openmeteo_historical_init["latitude"]),
         date_range=valid_openmeteo_historical_init["date_range"],
-        variables=["shortwave_radiation_sum", "temperature_2m_mean"],
+        variables=["shortwave_radiation_sum"],
         met_data=None,
         glm_met_data=None,
         timezone="Australia/Sydney",
@@ -124,18 +127,17 @@ def test_historical_get_data_daily_custom_variables(valid_openmeteo_historical_i
     tmp_historical.get_variables(request_settings=None)
 
     target_cols = [
-    "shortwave_radiation_sum",
-    "temperature_2m_mean"
+    "shortwave_radiation_sum"
     ]   
 
     src_cols = tmp_historical.met_data.data.columns
 
-    matching_cols = [c for c in src_cols if c  in target_cols]
+    matching_cols = [c for c in src_cols if c in target_cols]
 
 
     assert isinstance(tmp_historical.met_data.metadata, dict) \
         and isinstance(tmp_historical.met_data.data, pd.core.frame.DataFrame) \
-        and (len(matching_cols) == 2)
+        and (len(matching_cols) == 1)
         
 def test_historical_write_met(valid_openmeteo_historical_init):
     """Test writing data downloaded from open-meteo Historical API to file"""

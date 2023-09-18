@@ -40,8 +40,8 @@ import glm_met.openmeteo.historical as historical
 # - query a location in Western Australia
 hist = historical.Historical(
             location=(116.691155, -34.225812),
-            date_range=("1970-01-01", "2022-12-31"),
-            variables=["temperature_2m", "relativehumidity_2m"],
+            date_range=("2022-01-01", "2022-12-31"),
+            variables=["temperature_2m", "relativehumidity_2m","shortwave_radiation","cloudcover", "windspeed_10m","precipitation"],
             met_data=None,
             glm_met_data=None
         )
@@ -49,12 +49,13 @@ hist = historical.Historical(
 # make a call to the open-meteo Historical API
 # download requested data and store as DataFrame
 # in the `hist.met_data.data` attribute
-hist.get_variables()
+hist.get_variables(request_settings = None)
 
 # convert downloaded data to GLM format
 hist.convert_to_glm()
 
 # write downloaded data to disk
+
 hist.write_glm_met(path=os.getcwd(), zip_f=False, fname="met.csv")
 ```
 

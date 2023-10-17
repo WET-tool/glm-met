@@ -361,6 +361,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../silo/" class="md-nav__link">
+        SILO
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -543,7 +557,7 @@ open-meteo's historical API.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">hist</span><span class="o">.</span><span class="n">write_glm_met</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="n">zip_f</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">fname</span><span class="o">=</span><span class="s2">&quot;met.csv&quot;</span><span class="p">)</span>
 </code></pre></div>
     <p>After successful call to <code>get_variables()</code>, the <code>met_data</code> attribute
-of the <code>Historical</code> type object, <code>hist, is a</code>MetData` type object.
+of the <code>Historical</code> type object, <code>hist</code>, is a <code>MetData</code> type object.
 This object has two attributes: a metadata dict and a DataFrame of
 met data values.</p>
     <div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">metadata</span> <span class="o">=</span> <span class="n">hist</span><span class="o">.</span><span class="n">met_data</span><span class="o">.</span><span class="n">metadata</span>
@@ -658,7 +672,8 @@ variables, you will need to write your own function to convert the data
 to GLM format.</p>
 <p><code>cloudcover</code> from openmeteo is in percentage units. GLM requires it as
 a proportion (0.0 to 1.0).</p>
-<p><code>precipitation</code> is in mm. GLM requires it in m so it is converted.</p>
+<p><code>precipitation</code> is in mm. GLM requires it in m / day even if
+using hourly data, so it is converted.</p>
 
   </div>
 

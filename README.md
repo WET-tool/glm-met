@@ -1,6 +1,6 @@
 # GLM-met
 
-A Python package for downloading meteorological data and processing it to formats required for running the <a href="https://github.com/AquaticEcoDynamics/glm-aed/tree/main/binaries" target="_blank">GLM model</a>.
+A Python package for downloading meteorological data and processing it to formats required for running the <a href="https://github.com/AquaticEcoDynamics/glm-aed/tree/main/binaries" target="_blank">GLM model</a> and other water balance models.
 
 ## GLM 
 
@@ -61,6 +61,12 @@ hist.write_glm_met(path=os.getcwd(), zip_f=False, fname="met.csv")
 ## Data Providers
 
 glm-met provides a base class that can be extended to support a range of meteorological data providers. 
+
+### SILO
+
+<a href="https://www.longpaddock.qld.gov.au/silo/" target="_blank">SILO</a> is a database of daily, pre-processed Australian climate data from 1889 to the present day. The product is hosted by the Queensland Department of Environment and Science (DES) and is based on observational data from the Bureau of Meteorology and other providers. It is made available under the <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International (CC BY 4.0)</a> licence. 
+
+glm-met retrieves SILO data from the patched point dataset (weather station data) and the drill down (point-like data extracted from a gridded product). 
 
 ### open-meteo
 

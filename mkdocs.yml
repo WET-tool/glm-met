@@ -36,4 +36,5 @@ nav:
   - API Reference:
     - open-meteo (historical): open-meteo-historical.md
     - open-meteo (climate): open-meteo-climate.md
+    - SILO: silo.md
 

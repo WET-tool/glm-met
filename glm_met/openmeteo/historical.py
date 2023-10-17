@@ -54,7 +54,7 @@ class Historical(glm_met.GlmMet):
     >>> hist.write_glm_met(path=os.getcwd(), zip_f=False, fname="met.csv")
 
     After successful call to `get_variables()`, the `met_data` attribute
-    of the `Historical` type object, `hist, is a `MetData` type object.
+    of the `Historical` type object, `hist`, is a `MetData` type object.
     This object has two attributes: a metadata dict and a DataFrame of
     met data values.
 
@@ -227,7 +227,8 @@ class Historical(glm_met.GlmMet):
         `cloudcover` from openmeteo is in percentage units. GLM requires it as
         a proportion (0.0 to 1.0).
 
-        `precipitation` is in mm. GLM requires it in m so it is converted.
+        `precipitation` is in mm. GLM requires it in m / day even if
+        using hourly data, so it is converted.
         """
 
         if self.hourly:
@@ -243,7 +244,7 @@ class Historical(glm_met.GlmMet):
                     "AirTemp": self.met_data.data["temperature_2m"],
                     "RelHum": self.met_data.data["relativehumidity_2m"],
                     "WindSpeed": self.met_data.data["windspeed_10m"],
-                    "Rain": self.met_data.data["precipitation"] / 1000,
+                    "Rain": (self.met_data.data["precipitation"] / 1000) * 24,
                 }
             )
 

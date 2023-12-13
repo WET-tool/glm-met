@@ -16,3 +16,6 @@ build
 
 # MkDocs documentation
 site*/
+
+# Retired providers
+retired

@@ -1,6 +1,6 @@
 # GLM-met
 
-A Python package for downloading meteorological data and processing it to formats required for running the <a href="https://github.com/AquaticEcoDynamics/glm-aed/tree/main/binaries" target="_blank">GLM model</a>.
+A Python package for downloading meteorological data and processing it to formats required for running the <a href="https://github.com/AquaticEcoDynamics/glm-aed/tree/main/binaries" target="_blank">GLM model</a> and other water balance models.
 
 ## GLM 
 
@@ -23,7 +23,7 @@ pip install glm-met
 
 Import the glm-met package into a Python program and use to download meteorological data from a supported data provider.
 
-The following Jupyter notebook can be opened on Google Colab to demonstrate how glm-met can be used to download meteorological data from open-meteo's Historical API:
+The following Jupyter notebook can be opened on Google Colab to demonstrate how glm-met can be used to download meteorological data from NASA POWER's API:
 
 <a href="https://colab.research.google.com/github/WET-tool/glm-met/blob/main/example-use.ipynb" target="_blank">
   <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
@@ -31,31 +31,32 @@ The following Jupyter notebook can be opened on Google Colab to demonstrate how 
 
 ```
 import os
-import glm_met.openmeteo.historical as historical
+import glm_met.nasa_power.nasa_power as nasa_power
 
-# initialise a Historical object
+# initialise a Power object
 # the object attributes are set to:
-# - query the open-meteo Historical API 
-# - query for hourly met data from 1970 to 2022
+# - query the NASA POWER API 
+# - query for hourly met data from 2020 to 2022
 # - query a location in Western Australia
-hist = historical.Historical(
-            location=(116.691155, -34.225812),
-            date_range=("1970-01-01", "2022-12-31"),
-            variables=["temperature_2m", "relativehumidity_2m"],
-            met_data=None,
-            glm_met_data=None
-        )
 
-# make a call to the open-meteo Historical API
+power = nasa_power.Power(
+    location=(116.6, -32.17), 
+    date_range=("20200101", "20221231"), 
+    met_data=None,
+    glm_met_data=None,
+    parameters=None,
+)
+
+# make a call to the NASA POWER API
 # download requested data and store as DataFrame
-# in the `hist.met_data.data` attribute
-hist.get_variables()
+# in the `power.met_data.data` attribute
+power.get_variables(request_settings=None)
 
 # convert downloaded data to GLM format
-hist.convert_to_glm()
+power.convert_to_glm()
 
 # write downloaded data to disk
-hist.write_glm_met(path=os.getcwd(), zip_f=False, fname="met.csv")
+power.write_glm_met(path=os.getcwd(), zip_f=False, fname="met.csv")
 ```
 
 ## Data Providers
@@ -66,14 +67,10 @@ glm-met provides a base class that can be extended to support a range of meteoro
 
 <a href="https://www.longpaddock.qld.gov.au/silo/" target="_blank">SILO</a> is a database of daily, pre-processed Australian climate data from 1889 to the present day. The product is hosted by the Queensland Department of Environment and Science (DES) and is based on observational data from the Bureau of Meteorology and other providers. It is made available under the <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International (CC BY 4.0)</a> licence. 
 
-glm-met retrieves SILO data from the patched point dataset (weather station data) and the drill down (point-like data extracted from a gridded product).
+glm-met retrieves SILO data from the patched point dataset (weather station data) and the drill down (point-like data extracted from a gridded product). 
 
-### open-meteo
+### NASA POWER
 
-Currently, the <a href="https://open-meteo.com/en/docs/historical-weather-api" target="_blank">open-meteo Historical API</a> and <a href="https://open-meteo.com/en/docs/climate-api" target="_blank">open-meteo Climate API</a> are supported.
+<a href="https://power.larc.nasa.gov/docs/" target="_blank">NASA Prediction of Worldwide Energy Resources (POWER)</a> provides solar and meteorological data available at monthly, daily, and hourly time steps via the NASA POWER Data Services API. The NASA POWER project is funded by NASA's Applied Science Program and the data is available from the 1980s until near real time. The solar radiation data is derived from several remote sensing-based products at a 1.0° grid cell spatial resolution. The meteoroloical data is based on GMAO MERRA-2 reanalysis and assimilation of observations data at a 0.5° grid cell spatial resolution. 
 
-The **Historical API** can be used to download daily and hourly data for any location since 1940. It provides access to a range of weather variables including air temperature, relative humidity, dewpoint temperature, apparent temperature, precipitation, sealevel and surface pressure, cloud cover, evapotranspiration, vapor pressure deficit, and wind speed. The data is based on the ERA5 (25 km Global coverage), ERA5-Land (10 km Global land coverage), and CERRA (5 km Europe) reanalysis models. 
-
-The **Climate API** provides access to downscaled data from seven climate models. Daily future climate data can be accessed through till 2050. 
-
-The open-meteo API is available for non-commericial use for up to 10,000 daily API calls under a <a href="https://open-meteo.com/en/terms" target="_blank">CC-BY 4.0 license</a>. For commericail uses, pass in an API key to calls to the open-meteo API via the `get_variables()` method of the `Historical` and `ClimateChange` classes.  
+The hourly data from NASA POWER is available from 2001. Currently, glm-met provides tools to retrieve hourly data from the NASA POWER API. 

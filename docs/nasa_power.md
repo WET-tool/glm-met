@@ -1,11 +1,11 @@
 ## MetData
 
-::: glm_met.openmeteo.historical.MetData
+::: glm_met.nasa_power.nasa_power.MetData
     options:
         show_root_toc_entry: false
 
-## Climate
+## NASA POWER
 
-::: glm_met.openmeteo.climate_change.ClimateChange
+::: glm_met.nasa_power.nasa_power.Power
     options:
             show_root_toc_entry: false

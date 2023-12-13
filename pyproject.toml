@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "glm-met"
-version = "0.0.5"
+version = "0.0.7"
 description = "Download meteorological data for the General Lake Model"
 readme = "README.md"
 authors = [{name = "John Duncan"}]

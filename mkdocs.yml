@@ -34,7 +34,6 @@ nav:
   - Home: index.md
   - Contributing: contributing.md
   - API Reference:
-    - open-meteo (historical): open-meteo-historical.md
-    - open-meteo (climate): open-meteo-climate.md
+    - NASA POWER: nasa_power.md
     - SILO: silo.md
 

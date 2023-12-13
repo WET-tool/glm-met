@@ -7,7 +7,7 @@ import zipfile
 import glm_met.silo.silo as silo
 
 def test_silo_init():
-    """Test initialise histoical object"""
+    """Test initialise Silo object"""
     tmp_silo = silo.Silo(
         location=(116.6, -32.17), 
         date_range=("20220101", "20220131"), 
